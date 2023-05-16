@@ -131,7 +131,7 @@ def config(u, e):
 
     ⬇ Your code starts here:
     '''
-    pass
+    pass #Lista = [u, e], esto es para el geet conif del user y correo
     '''
     ⬆ Your code ends here.
     '''
@@ -219,3 +219,5 @@ def log():
 
 if __name__ == '__main__':
     cli()
+
+#hash dict ve que no hayan cambios o si, de esta manera hacer el comit.
