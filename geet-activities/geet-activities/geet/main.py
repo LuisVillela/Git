@@ -101,7 +101,9 @@ def init():
 
     ⬇ Your code starts here:
     '''
-    pass
+    with open(file_name, 'wb') as branch_file:
+        pickle.dump(branch_master, branch_file, pickle.HIGHEST_PROTOCOL)
+    
     '''
     ⬆ Your code ends here.
     '''
@@ -131,6 +133,15 @@ def config(u, e):
 
     ⬇ Your code starts here:
     '''
+    # user_config = [u,e]
+    # config_file = '.geet/user_config.txt'
+    # with open(config_file, 'w') as file:
+    #     file.write('\n'.join(user_config))
+
+    
+    # print('user and email config set:')
+    # print(f'Username: {u}')
+    # print(f'Username: {e}')
     pass #Lista = [u, e], esto es para el geet conif del user y correo
     '''
     ⬆ Your code ends here.
@@ -200,6 +211,10 @@ def log():
 
     ⬇ Your code starts here:
     '''
+    # with open(branch_path, 'rb') as file:
+    #     branch = pickle.load(file)
+    
+    # branch.reverse()
     pass
     branch = None # Remove. Added to avoid warning in line 211.
     '''

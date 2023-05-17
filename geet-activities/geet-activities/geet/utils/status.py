@@ -51,10 +51,19 @@ def read_file(path: str) -> str:
 
 
 def read_file_by_lines(path: str) -> list:
+#hice cambio
+   
+    file = open(path, encoding='utf8')
+    content = file.readlines()
+    return content
 
-    with open(path, 'r') as reader:
-        return reader.readlines()
+    # with open(path, 'r',encoding='utf-8', errors='replace') as reader:
+        # return reader.readlines()
 
+    # with open(path, 'r', encoding='utf8') as reader:
+    #         lines = [line.rstrip() for line in reader]
+    # return lines
+    
 
 def hash_file(path: str) -> str:
 
@@ -131,6 +140,7 @@ def scan_for_modified_files(path: str) -> list:
 
     return modified_files
         
+
 
 # PATH = get_current_path()
 # print(get_current_path())
