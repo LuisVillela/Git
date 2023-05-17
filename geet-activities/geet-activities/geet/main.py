@@ -187,7 +187,17 @@ def commit(m):
 
     ⬇ Your code starts here:
     '''
-    pass
+    config_file = '.geet/user_config.txt'
+    with open(config_file, 'r') as file:
+        user_config = file.read().splitlines()
+
+    commit_node = Node(commit_tree.name, commit_tree.message, user_config[0], user_config[1])
+
+    branch.insert_last(commit_node)
+
+    with open(branch_path, 'wb') as file:
+        pickle.dump(branch, file, pickle.HIGHEST_PROTOCOL)
+    # pass
     '''
     ⬆ Your code ends here.
     '''
@@ -211,12 +221,12 @@ def log():
 
     ⬇ Your code starts here:
     '''
-    # with open(branch_path, 'rb') as file:
-    #     branch = pickle.load(file)
+    with open(branch_path, 'rb') as file:
+        branch = pickle.load(file)
     
-    # branch.reverse()
-    pass
-    branch = None # Remove. Added to avoid warning in line 211.
+    branch.reverse()
+    # pass
+    # branch = None # Remove. Added to avoid warning in line 211.
     '''
     ⬆ Your code ends here.
     '''
