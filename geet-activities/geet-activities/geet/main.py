@@ -103,7 +103,6 @@ def init():
     '''
     with open(file_name, 'wb') as branch_file:
         pickle.dump(branch_master, branch_file, pickle.HIGHEST_PROTOCOL)
-    
     '''
     ⬆ Your code ends here.
     '''
@@ -142,7 +141,6 @@ def config(u, e):
     print('User and email config set:')
     print(f'Username: {u}')
     print(f'Email: {e}')
-    # pass #Lista = [u, e], esto es para el geet conif del user y correo
     '''
     ⬆ Your code ends here.
     '''
@@ -197,7 +195,6 @@ def commit(m):
 
     with open(branch_path, 'wb') as file:
         pickle.dump(branch, file, pickle.HIGHEST_PROTOCOL)
-    # pass
     '''
     ⬆ Your code ends here.
     '''
@@ -225,8 +222,6 @@ def log():
         branch = pickle.load(file)
     
     branch.reverse()
-    # pass
-    # branch = None # Remove. Added to avoid warning in line 211.
     '''
     ⬆ Your code ends here.
     '''
