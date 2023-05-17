@@ -133,16 +133,16 @@ def config(u, e):
 
     ⬇ Your code starts here:
     '''
-    # user_config = [u,e]
-    # config_file = '.geet/user_config.txt'
-    # with open(config_file, 'w') as file:
-    #     file.write('\n'.join(user_config))
+    user_config = [u, e]
+    user_config = [val for val in user_config if val is not None] # Filter out None values
+    config_file = '.geet/user_config.txt'
+    with open(config_file, 'w') as file:
+        file.write('\n'.join(user_config))
 
-    
-    # print('user and email config set:')
-    # print(f'Username: {u}')
-    # print(f'Username: {e}')
-    pass #Lista = [u, e], esto es para el geet conif del user y correo
+    print('User and email config set:')
+    print(f'Username: {u}')
+    print(f'Email: {e}')
+    # pass #Lista = [u, e], esto es para el geet conif del user y correo
     '''
     ⬆ Your code ends here.
     '''
