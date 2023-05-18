@@ -8,6 +8,9 @@ import click
 import time
 import sys
 import os
+from utils.data_structures.stack import ModifiedFilesStack
+from utils.status import list_files, read_file
+from utils.init import write_file
 
 
 @click.group()
@@ -235,6 +238,41 @@ def log():
         print('Commit contact:', commit.email, '\n')
 
     print('[Beginning of time]')
+
+@cli.command()
+@click.option('-p', '--path', help='Directory path')
+@click.option('-e', '--extension', help='File extension')
+@click.option('-c', '--new-content', help='New file content')
+def modify(path, extension, new_content):
+    """
+    Modifies files in a specified directory by replacing their content with new content.
+
+    - Provide the directory path using -p or --path option.
+    - Provide the file extension to filter the files using -e or --extension option.
+    - Provide the new content to be written into the files using -c or --new-content option.
+    """
+    modified_files_stack = ModifiedFilesStack()
+
+    files = list_files(path)
+
+    for file in files:
+        if file.endswith(extension):
+            file_path = os.path.join(path, file)
+            original_content = read_file(file_path)
+
+            # Save the original file in the stack before modifying it
+            modified_files_stack.push((file_path, original_content))
+
+            # Modify the file with the new content
+            write_file(file_path, new_content)
+
+    # # If necessary, restore the files in reverse order
+    # while not modified_files_stack.is_empty():
+    #     file_path, original_content = modified_files_stack.pop()
+    #     write_file(file_path, original_content)
+
+
+    
 
 
 if __name__ == '__main__':
