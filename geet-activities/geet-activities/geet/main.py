@@ -1,6 +1,9 @@
+from utils.data_structures.stack import ModifiedFilesStack
 from utils.data_structures.linked_list import Node
+from utils.status import list_files, read_file
 import utils.status as status_utils
 import utils.commit as commit_utils
+from utils.init import write_file
 import utils.init as init_utils
 from pyfiglet import Figlet
 import pickle
@@ -8,9 +11,9 @@ import click
 import time
 import sys
 import os
-from utils.data_structures.stack import ModifiedFilesStack
-from utils.status import list_files, read_file
-from utils.init import write_file
+
+
+
 
 
 @click.group()
@@ -136,7 +139,7 @@ def config(u, e):
     ⬇ Your code starts here:
     '''
     user_config = [u, e]
-    user_config = [val for val in user_config if val is not None] # Filter out None values
+    user_config = [val for val in user_config if val is not None] 
     config_file = '.geet/user_config.txt'
     with open(config_file, 'w') as file:
         file.write('\n'.join(user_config))
@@ -239,11 +242,28 @@ def log():
 
     print('[Beginning of time]')
 
+#TODO 7: Modify function
 @cli.command()
 @click.option('-p', '--path', help='Directory path')
 @click.option('-e', '--extension', help='File extension')
 @click.option('-c', '--new-content', help='New file content')
 def modify(path, extension, new_content):
+    def write_file(name: str, lines) -> None:
+        if isinstance(lines, str):
+            lines = lines.splitlines()
+
+        with open(name, 'w') as writer:
+            writer.write('\n'.join(lines))
+
+
+    def write_python_file(name: str, content) -> None:
+        if not isinstance(content, str):
+            content = str(content)
+
+        content = '"' + content + '"'
+
+        with open(name, 'w') as writer:
+            writer.write(content)
     """
     Modifies files in a specified directory by replacing their content with new content.
 
@@ -264,15 +284,10 @@ def modify(path, extension, new_content):
             modified_files_stack.push((file_path, original_content))
 
             # Modify the file with the new content
-            write_file(file_path, new_content)
-
-    # # If necessary, restore the files in reverse order
-    # while not modified_files_stack.is_empty():
-    #     file_path, original_content = modified_files_stack.pop()
-    #     write_file(file_path, original_content)
-
-
-    
+            if file.endswith('.py'):
+                write_python_file(file_path, new_content)
+            else:
+                write_file(file_path, new_content) 
 
 
 if __name__ == '__main__':
